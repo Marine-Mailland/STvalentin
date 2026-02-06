@@ -1,8 +1,7 @@
 var ouiBtn = document.getElementById("ouiBtn");
 var nonBtn = document.getElementById("nonBtn");
 var message = document.getElementById("message");
-var ouiSize = 1;
-var nonSize = 1;
+var clicsNon = 0; // Compteur de clics sur "Non"
 function oui() {
     ouiBtn.remove();
     nonBtn.remove();
@@ -17,11 +16,20 @@ function oui() {
     gif.style.display = "block"; // Afficher le GIF
 }
 function non() {
-    ouiSize += 0.5;
-    ouiBtn.style.transform = "scale(".concat(ouiSize, ")");
-    nonSize = Math.max(0.5, nonSize - 0.1);
-    nonBtn.style.transform = "scale(".concat(nonSize, ")");
-    nonBtn.textContent = "Option non disponible ⛔";
+    clicsNon++;
+    // Changer le texte selon le nombre de clics
+    if (clicsNon === 1) {
+        nonBtn.textContent = "Tu es sûr ? 🤔";
+    }
+    else if (clicsNon === 2) {
+        nonBtn.textContent = "Vraiment ?? 😢";
+    }
+    else if (clicsNon === 3) {
+        nonBtn.textContent = "Réfléchis bien... 💔";
+    }
+    else {
+        nonBtn.textContent = "Option non disponible ⛔";
+    }
 }
 ouiBtn.addEventListener("click", oui);
 nonBtn.addEventListener("click", non);
